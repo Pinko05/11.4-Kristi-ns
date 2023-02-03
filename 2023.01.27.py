@@ -6,25 +6,28 @@ words=["viens", "divi", "trīs", "cits"]
 while True:
     totalLives=5
     word= random.choice(words)
-    guessedWord = list("_" for _ in word) # ["_", "_", "_"]
+    guessedWord = list("_" for _ in word)
     print(word)
 
     while (totalLives > 0 and not "".join(guessedWord) == word):
-        inp= input("Ievade (burts): ")
-        if (len(inp) < 1): continue
-        inp = inp[0]
-
-        didGuessLetter= False
+        inp= input("Ievade (vārds): ")
+        if (len(inp) != len(word)): continue
+        #inp = inp[0]
+        
+        guessedWord = list("_" for _ in word)
         for aaa in range(0, len(guessedWord)):
-            if word[aaa]== inp:
-                guessedWord[aaa]=inp
-                didGuessLetter= True
+            if word[aaa]== inp[aaa]:
+                guessedWord[aaa]=inp[aaa]
+                print(f"{Fore.GREEN}{inp[aaa]}{Style.RESET_ALL}", end="")
+            elif inp[aaa] in word:
+                print (f"{Fore.YWLLOW}{inp[aaa]}{Style.RESET_ALL}", end="")
+            else:
+                print (f"{inp[aaa]}", end="")
+        print("")
+        totalLives -= 1
 
-        if not didGuessLetter:
-            totalLives -= 1
-
-        print(didGuessLetter)
-        print("".join(guessedWord))
+        #print(didGuessLetter)
+        #print("".join(guessedWord))
 
     if (totalLives > 0): 
         print("Uzvara!")
